@@ -140,10 +140,12 @@ public struct GoogleBooksApi {
             public typealias Result = Volumes
             private let query: String
             let authInfo: GoogleBooksApiAuthInfo?
+            let startIndex: Int
             
-            public init(query: String, authInfo: GoogleBooksApiAuthInfo? = nil) {
+            public init(query: String, authInfo: GoogleBooksApiAuthInfo? = nil, startIndex: Int = 0) {
                 self.query = query
                 self.authInfo = authInfo
+                self.startIndex = startIndex
             }
             
             var method: HttpMethod {
@@ -155,11 +157,9 @@ public struct GoogleBooksApi {
             }
             
             var params: [RequestParameter] {
-                return [("q", query)]
+                return [("q", query),("startIndex", String(startIndex))]
             }
-            
         }
-        
     }
     
     // MARK: - Bookshelves.Volumes
